@@ -29,8 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-key")
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -46,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework_simplejwt',
+    'corsheaders',
+
 
     'apps.users',
     'apps.orders',
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -117,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Shymkent'
+TIME_ZONE = 'Asia/Almaty'
 
 USE_I18N = True
 
@@ -171,3 +173,8 @@ CACHES = {
 CORS_ALLOW_ALL_ORIGINS = True
 
 AUTH_USER_MODEL = 'users.User'
+
+INFOBIP_API_KEY = os.getenv("INFOBIP_API_KEY")
+INFOBIP_BASE_URL = os.getenv("INFOBIP_BASE_URL")
+INFOBIP_SENDER = os.getenv("INFOBIP_SENDER", "TezYet")
+SMS_SKIP_IN_DEV = os.getenv("SMS_SKIP_IN_DEV", "False") == "True"
